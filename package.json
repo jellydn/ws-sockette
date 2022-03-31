@@ -42,7 +42,8 @@
   },
   "scripts": {
     "build": "tsup --dts --format esm,cjs,iife --legacy-output",
-    "dev": "DEBUG=* node -r tsm example/index.ts",
+    "dev": "node -r tsm example/index.ts",
+    "dev:debug": "DEBUG=* node -r tsm example/index.ts",
     "test": "xo && uvu -r tsm tests",
     "prepare": "husky install && yarn build"
   },

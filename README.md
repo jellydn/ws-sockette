@@ -9,7 +9,7 @@
 ## Install
 
 ```sh
-yarn install ws-sockette
+yarn add ws-sockette
 ```
 
 ## Why
@@ -31,9 +31,9 @@ That's why I take a chance to rewrite with typescript and support nodejs. If you
 ## Usage
 
 ```typescript
-const WsSockette = require("ws-sockette");
+import { wsSockette } from "ws-sockette";
 
-const ws = WsSockette("ws://localhost:3000", {
+const ws = wsSockette("ws://localhost:3000", {
   clientOptions: {
     headers: {
       Authorization: "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
@@ -76,7 +76,7 @@ interface SocketteOptions {
 }
 ```
 
-Please check it [here for complete document](https://github.com/lukeed/sockette/blob/master/readme.md#api)
+Please check [here for complete document](https://github.com/lukeed/sockette/blob/master/readme.md#api)
 
 ## Run tests
 
