@@ -33,7 +33,7 @@ That's why I take a chance to rewrite with typescript and support nodejs. If you
 ```typescript
 const WsSockette = require("ws-sockette");
 
-const ws = new WsSockette("ws://localhost:3000", {
+const ws = WsSockette("ws://localhost:3000", {
   clientOptions: {
     headers: {
       Authorization: "Basic YWxhZGRpbjpvcGVuc2VzYW1l",

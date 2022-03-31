@@ -1,8 +1,10 @@
+import {debug} from 'debug';
 import {Buffer} from 'node:buffer';
 import {ClientRequestArgs} from 'node:http';
 import WebSocket from 'ws';
 
 function noop() {
+  debug('noop');
   // Noop
 }
 
@@ -19,13 +21,10 @@ export interface SocketteOptions {
   onerror?: (ev: WebSocket.ErrorEvent) => any;
 }
 
-export default function wsSockette(
-  url: string | URL,
-  options: SocketteOptions,
-) {
+export function wsSockette(url: string | URL, options: SocketteOptions) {
   let ws: WebSocket;
   let counter = 0;
-  let timer: NodeJS.Timeout;
+  let timer = 1;
   const $: {
     open: () => void;
     reconnect: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => void;
@@ -52,19 +51,25 @@ export default function wsSockette(
     timeout = 1e3,
   } = options || {};
 
+  const logger = debug('ws-sockette');
+
   $.open = function () {
+    logger('Opening websocket', url);
     ws = new WebSocket(url, protocols, clientOptions);
 
     ws.addEventListener('message', (event) => {
+      logger('Received:', event);
       onmessage(event);
     });
 
     ws.addEventListener('open', (event) => {
+      logger('Connected!', event);
       onopen(event);
       counter = 0;
     });
 
     ws.addEventListener('close', (event) => {
+      logger('Closed!', event);
       if (!(event.code === 1e3 || event.code === 1001 || event.code === 1005)) {
         $.reconnect(event);
       }
@@ -73,6 +78,7 @@ export default function wsSockette(
     });
 
     ws.addEventListener('error', (event) => {
+      logger('Error:', event);
       if (event?.type === 'ECONNREFUSED') {
         $.reconnect(event);
       } else {
@@ -82,7 +88,9 @@ export default function wsSockette(
   };
 
   $.reconnect = (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => {
+    logger('Reconnecting...', event);
     if (timer && counter++ < maxAttempts) {
+      // @ts-expect-error error TS2322: Type 'Timeout' is not assignable to type 'number'.
       timer = setTimeout(() => {
         onreconnect(event);
         $.open();
@@ -93,15 +101,19 @@ export default function wsSockette(
   };
 
   $.json = function (data: any) {
+    logger('Sending:', data);
     ws.send(JSON.stringify(data));
   };
 
   $.send = function (data: any) {
+    logger('Sending:', data);
     ws.send(data);
   };
 
   $.close = function (code = 1e3, data?: string | Buffer | undefined) {
-    clearTimeout(timer);
+    logger('Closing websocket', code, data);
+    // @ts-expect-error error TS2322: Type 'void' is not assignable to type 'number'.
+    timer = clearTimeout(timer);
     ws.close(code, data);
   };
 
