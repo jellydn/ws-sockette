@@ -21,17 +21,23 @@ export interface SocketteOptions {
   onerror?: (ev: WebSocket.ErrorEvent) => any;
 }
 
-export function wsSockette(url: string | URL, options: SocketteOptions) {
+export interface WsSockette {
+  open: () => void;
+  reconnect: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => void;
+  json: (data: any) => void;
+  send: (data: any) => void;
+  close: (code: number, data?: string | Buffer | undefined) => void;
+}
+
+export function wsSockette(
+  url: string | URL,
+  options: SocketteOptions,
+): WsSockette {
   let ws: WebSocket;
   let counter = 0;
   let timer = 1;
-  const $: {
-    open: () => void;
-    reconnect: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => void;
-    json: (data: any) => void;
-    send: (data: any) => void;
-    close: (code: number, data?: string | Buffer | undefined) => void;
-  } = {
+
+  const $: WsSockette = {
     open: noop,
     reconnect: noop,
     json: noop,
