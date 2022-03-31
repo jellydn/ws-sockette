@@ -1,5 +1,5 @@
-import {ClientRequestArgs} from 'node:http';
 import {Buffer} from 'node:buffer';
+import {ClientRequestArgs} from 'node:http';
 import WebSocket from 'ws';
 
 function noop() {
