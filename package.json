@@ -1,0 +1,34 @@
+{
+  "name": "ws-sockette",
+  "version": "0.1.0",
+  "module": "dist/esm/index.js",
+  "unpkg": "dist/iife/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Huynh Duc Dung",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.26",
+    "@types/ws": "^8.5.3",
+    "tsm": "^2.2.1",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.3",
+    "uvu": "^0.5.3",
+    "xo": "^0.48.0"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "splitting": false,
+    "sourcemap": true,
+    "clean": true
+  },
+  "scripts": {
+    "build": "tsup --dts --format esm,cjs,iife --legacy-output",
+    "test": "xo && uvu -r tsm tests"
+  }
+}
