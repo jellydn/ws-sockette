@@ -7,6 +7,13 @@
   "types": "dist/index.d.ts",
   "author": "Huynh Duc Dung",
   "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
   "dependencies": {
     "ws": "^8.5.0"
   },
