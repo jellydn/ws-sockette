@@ -27,6 +27,7 @@ export interface WsSockette {
   json: (data: any) => void;
   send: (data: any) => void;
   close: (code: number, data?: string | Buffer | undefined) => void;
+  getWsInstance: () => WebSocket;
 }
 
 export function wsSockette(
@@ -43,6 +44,7 @@ export function wsSockette(
     json: noop,
     send: noop,
     close: noop,
+    getWsInstance: () => ws,
   };
   const {
     protocols = [],
@@ -96,30 +98,28 @@ export function wsSockette(
   $.reconnect = (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => {
     logger('Reconnecting...', event);
     if (timer && counter++ < maxAttempts) {
-      // @ts-expect-error error TS2322: Type 'Timeout' is not assignable to type 'number'.
       timer = setTimeout(() => {
         onreconnect(event);
         $.open();
-      }, timeout);
+      }, timeout) as unknown as number;
     } else {
       onmaximum(event);
     }
   };
 
-  $.json = function (data: any) {
-    logger('Sending:', data);
+  $.json = function (data: unknown) {
+    logger('Sending json:', data);
     ws.send(JSON.stringify(data));
   };
 
-  $.send = function (data: any) {
+  $.send = function (data: unknown) {
     logger('Sending:', data);
     ws.send(data);
   };
 
   $.close = function (code = 1e3, data?: string | Buffer | undefined) {
     logger('Closing websocket', code, data);
-    // @ts-expect-error error TS2322: Type 'void' is not assignable to type 'number'.
-    timer = clearTimeout(timer);
+    timer = clearTimeout(timer) as unknown as number;
     ws.close(code, data);
   };
 
