@@ -12,15 +12,14 @@
     "src"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
-    "debug": "4.3.4",
+    "diary": "0.4.4",
     "ws": "8.13.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.1.1",
-    "@types/debug": "4.1.7",
     "@types/node": "18.15.3",
     "@types/ws": "8.5.4",
     "husky": "8.0.3",
@@ -44,7 +43,8 @@
     "build": "tsup --dts --format esm,cjs,iife --legacy-output",
     "dev": "node -r tsm example/index.ts",
     "dev:debug": "DEBUG=* node -r tsm example/index.ts",
-    "test": "xo && uvu -r tsm tests",
+    "lint": "xo --fix",
+    "test": "uvu -r tsm tests",
     "prepare": "husky install && yarn build"
   },
   "lint-staged": {

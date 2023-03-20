@@ -1,14 +1,16 @@
-import {debug} from 'debug';
-import {Buffer} from 'node:buffer';
-import {ClientRequestArgs} from 'node:http';
+import {debug, diary, enable} from 'diary';
+import {type Buffer} from 'node:buffer';
+import {type ClientRequestArgs} from 'node:http';
 import WebSocket from 'ws';
+
+enable('*');
 
 function noop() {
   debug('noop');
   // Noop
 }
 
-export interface SocketteOptions {
+export type SocketteOptions = {
   protocols?: string | string[];
   clientOptions?: WebSocket.ClientOptions | ClientRequestArgs;
   timeout?: number;
@@ -19,16 +21,16 @@ export interface SocketteOptions {
   onmaximum?: (ev: WebSocket.ErrorEvent | WebSocket.CloseEvent) => any;
   onclose?: (ev: WebSocket.CloseEvent) => any;
   onerror?: (ev: WebSocket.ErrorEvent) => any;
-}
+};
 
-export interface WsSockette {
+export type WsSockette = {
   open: () => void;
   reconnect: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => void;
   json: (data: any) => void;
   send: (data: any) => void;
   close: (code: number, data?: string | Buffer | undefined) => void;
   getWsInstance: () => WebSocket;
-}
+};
 
 export function wsSockette(
   url: string | URL,
@@ -59,25 +61,25 @@ export function wsSockette(
     timeout = 1e3,
   } = options || {};
 
-  const logger = debug('ws-sockette');
+  const logger = diary('sockette');
 
   $.open = function () {
-    logger('Opening websocket', url);
+    logger.info('Opening websocket', url);
     ws = new WebSocket(url, protocols, clientOptions);
 
     ws.addEventListener('message', (event) => {
-      logger('Received:', event);
+      logger.info('Received:', event);
       onmessage(event);
     });
 
     ws.addEventListener('open', (event) => {
-      logger('Connected!', event);
+      logger.info('Connected!', event);
       onopen(event);
       counter = 0;
     });
 
     ws.addEventListener('close', (event) => {
-      logger('Closed!', event);
+      logger.info('Closed!', event);
       if (!(event.code === 1e3 || event.code === 1001 || event.code === 1005)) {
         $.reconnect(event);
       }
@@ -86,7 +88,7 @@ export function wsSockette(
     });
 
     ws.addEventListener('error', (event) => {
-      logger('Error:', event);
+      logger.info('Error:', event);
       if (event?.type === 'ECONNREFUSED') {
         $.reconnect(event);
       } else {
@@ -96,7 +98,7 @@ export function wsSockette(
   };
 
   $.reconnect = (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => {
-    logger('Reconnecting...', event);
+    logger.info('Reconnecting...', event);
     if (timer && counter++ < maxAttempts) {
       timer = setTimeout(() => {
         onreconnect(event);
@@ -108,17 +110,17 @@ export function wsSockette(
   };
 
   $.json = function (data: unknown) {
-    logger('Sending json:', data);
+    logger.info('Sending json:', data);
     ws.send(JSON.stringify(data));
   };
 
   $.send = function (data: unknown) {
-    logger('Sending:', data);
-    ws.send(data);
+    logger.info('Sending:', data);
+    ws.send(data as ArrayBufferLike);
   };
 
   $.close = function (code = 1e3, data?: string | Buffer | undefined) {
-    logger('Closing websocket', code, data);
+    logger.info('Closing websocket', code, data);
     timer = clearTimeout(timer) as unknown as number;
     ws.close(code, data);
   };
