@@ -15,8 +15,8 @@
     "node": ">=12"
   },
   "dependencies": {
-    "debug": "^4.3.4",
-    "ws": "^8.5.0"
+    "debug": "4.3.4",
+    "ws": "8.5.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "3.4.0",
