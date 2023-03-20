@@ -1,6 +1,6 @@
 {
   "name": "ws-sockette",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "module": "dist/esm/index.js",
   "unpkg": "dist/iife/index.js",
   "main": "dist/index.js",
