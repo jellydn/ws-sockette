@@ -16,21 +16,21 @@
   },
   "dependencies": {
     "debug": "4.3.4",
-    "ws": "8.5.0"
+    "ws": "8.13.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.1.1",
     "@types/debug": "4.1.7",
-    "@types/node": "18.11.9",
-    "@types/ws": "8.5.3",
-    "husky": "8.0.1",
-    "lint-staged": "13.0.3",
-    "prettier": "2.7.1",
-    "tsm": "2.2.2",
-    "tsup": "6.3.0",
+    "@types/node": "18.15.3",
+    "@types/ws": "8.5.4",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.0",
+    "prettier": "2.8.5",
+    "tsm": "2.3.0",
+    "tsup": "6.7.0",
     "typescript": "5.0.2",
     "uvu": "0.5.6",
-    "xo": "0.52.4"
+    "xo": "0.53.1"
   },
   "tsup": {
     "entry": [
