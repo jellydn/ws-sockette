@@ -24,7 +24,7 @@
     "@types/ws": "8.5.5",
     "husky": "8.0.3",
     "lint-staged": "13.3.0",
-    "prettier": "3.0.1",
+    "prettier": "3.0.2",
     "tsm": "2.3.0",
     "tsup": "7.2.0",
     "typescript": "5.1.6",
