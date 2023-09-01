@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.2.0",
-    "@types/node": "18.17.12",
+    "@types/node": "18.17.13",
     "@types/ws": "8.5.5",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
