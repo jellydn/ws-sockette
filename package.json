@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "diary": "0.4.4",
-    "ws": "8.15.1"
+    "ws": "8.16.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
