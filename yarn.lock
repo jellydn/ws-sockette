@@ -1017,10 +1017,10 @@ dequal@^2.0.0:
   resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"
   integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
-diary@0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/diary/-/diary-0.4.4.tgz#99d7e2877c15072c7a4933f08ff615ccfcd6126e"
-  integrity sha512-CTIivFihV6Y0gik2Y9HIOoB9hnUEPej5z4lkSMkmGBZSdUhjfYB7qtLVCHWr0g2RwtR98prF8aFdUaeth0kVgg==
+diary@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/diary/-/diary-0.4.5.tgz#d3b61676ee0234576ac156feb3e82be98fc8d367"
+  integrity sha512-dUtG/AVG5bt9Mi+23TgTvjZ0NDJaszjs1GpYooM5cbEzk2xoqdvxCOlVw0xkenQXZw/DFxp23tj5VkP6YmlRmw==
 
 diff@^5.0.0:
   version "5.1.0"
