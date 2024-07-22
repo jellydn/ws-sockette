@@ -23,7 +23,7 @@
     "@types/node": "18.19.41",
     "@types/ws": "8.5.11",
     "husky": "8.0.3",
-    "lint-staged": "14.0.1",
+    "lint-staged": "15.2.7",
     "prettier": "3.3.3",
     "tsm": "2.3.0",
     "tsup": "8.2.2",
