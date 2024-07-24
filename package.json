@@ -1,18 +1,28 @@
 {
   "name": "ws-sockette",
   "version": "0.2.0",
-  "module": "dist/esm/index.js",
-  "unpkg": "dist/iife/index.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "author": "Huynh Duc Dung",
   "license": "MIT",
+  "author": "Huynh Duc Dung",
+  "main": "dist/index.js",
+  "unpkg": "dist/iife/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
-  "engines": {
-    "node": ">=14"
+  "scripts": {
+    "build": "tsup --dts --format esm,cjs,iife --legacy-output",
+    "dev": "node -r tsm example/index.ts",
+    "dev:debug": "DEBUG=* node -r tsm example/index.ts",
+    "lint": "xo --fix",
+    "prepare": "yarn build",
+    "test": "uvu -r tsm tests",
+    "typestat": "npx typestat --config typestat.json"
+  },
+  "lint-staged": {
+    "*.{js,ts,css,md}": "prettier --write",
+    "*.{js,ts}": "xo --fix"
   },
   "dependencies": {
     "diary": "0.4.5",
@@ -31,6 +41,10 @@
     "uvu": "0.5.6",
     "xo": "0.59.2"
   },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "engines": {
+    "node": ">=18"
+  },
   "tsup": {
     "entry": [
       "src/index.ts"
@@ -38,17 +52,5 @@
     "splitting": false,
     "sourcemap": true,
     "clean": true
-  },
-  "scripts": {
-    "build": "tsup --dts --format esm,cjs,iife --legacy-output",
-    "dev": "node -r tsm example/index.ts",
-    "dev:debug": "DEBUG=* node -r tsm example/index.ts",
-    "lint": "xo --fix",
-    "test": "uvu -r tsm tests",
-    "prepare": "husky install && yarn build"
-  },
-  "lint-staged": {
-    "*.{js,ts,css,md}": "prettier --write",
-    "*.{js,ts}": "xo --fix"
   }
 }

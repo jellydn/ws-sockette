@@ -1,13 +1,13 @@
+import type {Buffer} from 'node:buffer';
+import type {ClientRequestArgs} from 'node:http';
 import {debug, diary, enable} from 'diary';
-import {type Buffer} from 'node:buffer';
-import {type ClientRequestArgs} from 'node:http';
 import WebSocket from 'ws';
 
 enable('*');
 
 function noop() {
-  debug('noop');
   // Noop
+  debug('noop');
 }
 
 export type SocketteOptions = {
@@ -15,12 +15,12 @@ export type SocketteOptions = {
   clientOptions?: WebSocket.ClientOptions | ClientRequestArgs;
   timeout?: number;
   maxAttempts?: number;
-  onopen?: (ev: WebSocket.Event) => any;
-  onmessage?: (ev: WebSocket.MessageEvent) => any;
-  onreconnect?: (ev: WebSocket.ErrorEvent | WebSocket.CloseEvent) => any;
-  onmaximum?: (ev: WebSocket.ErrorEvent | WebSocket.CloseEvent) => any;
-  onclose?: (ev: WebSocket.CloseEvent) => any;
-  onerror?: (ev: WebSocket.ErrorEvent) => any;
+  onopen?: (event: WebSocket.Event) => any;
+  onmessage?: (event: WebSocket.MessageEvent) => any;
+  onreconnect?: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => any;
+  onmaximum?: (event: WebSocket.ErrorEvent | WebSocket.CloseEvent) => any;
+  onclose?: (event: WebSocket.CloseEvent) => any;
+  onerror?: (event: WebSocket.ErrorEvent) => any;
 };
 
 export type WsSockette = {
@@ -63,7 +63,7 @@ export function wsSockette(
 
   const logger = diary('sockette');
 
-  $.open = function () {
+  $.open = () => {
     logger.info('Opening websocket', url);
     ws = new WebSocket(url, protocols, clientOptions);
 
@@ -109,17 +109,17 @@ export function wsSockette(
     }
   };
 
-  $.json = function (data: unknown) {
+  $.json = (data: unknown) => {
     logger.info('Sending json:', data);
     ws.send(JSON.stringify(data));
   };
 
-  $.send = function (data: unknown) {
+  $.send = (data: unknown) => {
     logger.info('Sending:', data);
     ws.send(data as ArrayBufferLike);
   };
 
-  $.close = function (code = 1e3, data?: string | Buffer | undefined) {
+  $.close = (code = 1e3, data?: string | Buffer | undefined) => {
     logger.info('Closing websocket', code, data);
     timer = clearTimeout(timer) as unknown as number;
     ws.close(code, data);
