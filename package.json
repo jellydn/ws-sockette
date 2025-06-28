@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "diary": "0.4.5",
-    "ws": "8.18.2"
+    "ws": "8.18.3"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
-    "@types/node": "20.19.1",
+    "@types/node": "20.19.2",
     "@types/ws": "8.18.1",
     "husky": "9.1.7",
     "lint-staged": "15.5.2",
