@@ -29,7 +29,7 @@
     "ws": "8.19.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "@trivago/prettier-plugin-sort-imports": "6.0.2",
     "@types/node": "20.19.33",
     "@types/ws": "8.18.1",
     "husky": "9.1.7",
